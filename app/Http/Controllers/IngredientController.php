@@ -20,12 +20,13 @@ class IngredientController extends Controller
 
         $validatedData = $request->validate([
             'ingredient_name' => 'required|string|max:255',
+            'expiry_date' => 'required',
         ]);
 
         $success = SavedIngredient::create([
             'user_id' => $request->user_id,
             'ingredient_name' => $validatedData['ingredient_name'],
-            'expiry_date' => Carbon::now(),
+            'expiry_date' => $validatedData['expiry_date'],
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ])->save();
