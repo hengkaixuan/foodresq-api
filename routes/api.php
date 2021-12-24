@@ -22,6 +22,10 @@ Route::post('/login', [AuthController::class, 'login']);
 //ingredient
 Route::post('/save_ingredient', [IngredientController::class, 'create']);
 Route::get('/ingredient', [IngredientController::class, 'index']);
+//user id
+Route::get('/ingredient/{id}', [IngredientController::class, 'show']);
+//ingredient id
+Route::delete('/ingredientDelete/{id}', [IngredientController::class, 'delete']);
 
 Route::group(['middleware' => ['auth:sanctum']], function(){
     Route::post('/logout', [AuthController::class, 'logout']);

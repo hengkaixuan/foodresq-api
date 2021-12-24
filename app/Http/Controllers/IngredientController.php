@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 use App\Models\SavedIngredient;
 use Carbon\Carbon;
+use DateTime;
+use DatePeriod;
+use DateInterval;
+use Illuminate\Support\Facades\DB;
+
 
 use Illuminate\Http\Request;
 
@@ -31,6 +36,24 @@ class IngredientController extends Controller
             'updated_at' => Carbon::now(),
         ])->save();
 
+        return $success;
+    }
+
+    public function show(int $id)
+    {
+        $saved = DB::table('saved_ingredients')
+                    ->where('user_id', '=', $id)
+                    ->orderBy('expiry_date', 'desc')
+                    ->get();
+
+        return $saved;
+    }
+
+    public function delete(int $id)
+    {
+        $success = DB::table('saved_ingredients')
+                      ->where('id', '=', $id)
+                      ->delete();
         return $success;
     }
 }
