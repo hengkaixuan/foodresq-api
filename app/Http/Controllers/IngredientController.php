@@ -43,7 +43,7 @@ class IngredientController extends Controller
     {
         $saved = DB::table('saved_ingredients')
                     ->where('user_id', '=', $id)
-                    ->orderBy('expiry_date', 'desc')
+                    ->orderBy('expiry_date', 'asc')
                     ->get();
 
         return $saved;
