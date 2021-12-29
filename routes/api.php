@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\IngredientController;
+use App\Http\Controllers\ConsumedIngController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +20,15 @@ use Illuminate\Support\Facades\Route;
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
+//ingredient
+Route::post('/save_ingredient', [IngredientController::class, 'create']);
+Route::get('/ingredient', [IngredientController::class, 'index']);
+//user id
+Route::get('/ingredient/{id}', [IngredientController::class, 'show']);
+//ingredient id
+Route::delete('/ingredientDelete/{id}', [IngredientController::class, 'delete']);
+//consumed ingredient
+Route::post('/consumed_ingredient', [ConsumedIngController::class, 'create']);
 
 Route::group(['middleware' => ['auth:sanctum']], function(){
     Route::post('/logout', [AuthController::class, 'logout']);
