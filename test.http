@@ -43,3 +43,14 @@ Content-Type: application/json
 DELETE  http://127.0.0.1:8000/api/ingredientDelete/5 HTTP/1.1
 Accept: application/json
 Content-Type: application/json
+
+###
+POST http://127.0.0.1:8000/api/consumed_ingredient HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+{
+    "user_id": 1,
+    "ingredient_name": "Test2",
+    "expiry_date": "2021-12-22 16:14:58"
+}
