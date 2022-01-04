@@ -3,8 +3,8 @@ Accept: application/json
 Content-Type: application/json
 
 {
-    "name": "test1",
-    "email":"test1@test.com",
+    "name": "test100",
+    "email":"test100@test.com",
     "password": "12345678"
 }
 
@@ -17,6 +17,12 @@ Content-Type: application/json
     "email": "test1@test.com",
     "password": "12345678"
 }
+
+###
+POST http://127.0.0.1:8000/api/me HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer 31|0CWvkhVJw7dyZh3zk2zxp1Fo9CpWnTGP4K4tGThG
 
 ###
 POST http://127.0.0.1:8000/api/logout HTTP/1.1

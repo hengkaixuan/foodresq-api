@@ -19,18 +19,22 @@ use Illuminate\Support\Facades\Route;
 //Public Routes
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
-
-//ingredient
-Route::post('/save_ingredient', [IngredientController::class, 'create']);
 Route::get('/ingredient', [IngredientController::class, 'index']);
-//user id
-Route::get('/ingredient/{id}', [IngredientController::class, 'show']);
-//ingredient id
-Route::delete('/ingredientDelete/{id}', [IngredientController::class, 'delete']);
-//consumed ingredient
-Route::post('/consumed_ingredient', [ConsumedIngController::class, 'create']);
 
 Route::group(['middleware' => ['auth:sanctum']], function(){
+    //auth
+    Route::post('/me', [AuthController::class, 'me']);
+
+    //ingredient
+    Route::post('/save_ingredient', [IngredientController::class, 'create']);
+    //user id
+    Route::get('/ingredient/{id}', [IngredientController::class, 'show']);
+    //ingredient id
+    Route::delete('/ingredientDelete/{id}', [IngredientController::class, 'delete']);
+    //consumed ingredient
+    Route::post('/consumed_ingredient', [ConsumedIngController::class, 'create']);
+
+    //logout
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 

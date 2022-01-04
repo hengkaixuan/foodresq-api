@@ -43,7 +43,7 @@ class AuthController extends Controller
             'password' => 'required|string'
         ]);
 
-        $user = User::where('email', $fields['email'])->first();
+        $user = User::where('email', '=', $fields['email'])->firstOrFail();
         
         if(!$user || !Hash::check($fields['password'],$user->password)){
             return response([
@@ -58,16 +58,33 @@ class AuthController extends Controller
         //     'token' => $token
         // ];
 
-        $user = auth()->user();
-        $user = User::withSelectUser()
-            ->where($request['login'])
-            ->firstOrFail();
+        // $user = auth()->user();
+        // $user = User::withSelectUser()
+        //     ->where($request['login'])
+        //     ->firstOrFail();
 
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
         $user->accessToken = $token;
         $user->tokenType = 'Bearer';
+        $user->isLogin = true;
+
+        return $user;
+    }
+
+    public function me(Request $request)
+    {
+
+        $user_id = $request->user()->id;
+        $user = auth()->user();
+        $user = User::withSelectUser()->withExtraUserAttributes($user->id)
+            ->where('users.id', $user_id)
+            ->firstOrFail();
+
+        // $user->accessToken = request()->user()->currentAccessToken()->token;
+        // $user->tokenType = 'Bearer';
+
         $user->isLogin = true;
 
         return $user;
