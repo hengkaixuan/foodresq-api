@@ -41,4 +41,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function scopeWithSelectUser($query)
+    {
+            return $query
+            ->select(
+                'users.id as id',
+                'users.name as name',
+                'users.email as email',
+                'users.created_at as createdAt',
+                'users.updated_at as updatedAt',
+            );
+    }
 }
