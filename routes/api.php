@@ -26,6 +26,7 @@ Route::get('/ingredient', [IngredientController::class, 'index']);
 //user id
 Route::get('/ingredient/{id}', [IngredientController::class, 'show']);
 //ingredient id
+Route::post('/check_expired/{ing_id}/{id}', [IngredientController::class, 'checkExpired']);
 Route::delete('/ingredientDelete/{id}', [IngredientController::class, 'delete']);
 //consumed ingredient
 Route::post('/consumed_ingredient', [ConsumedIngController::class, 'create']);

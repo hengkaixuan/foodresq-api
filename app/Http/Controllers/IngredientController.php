@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Models\SavedIngredient;
+use App\Models\Expired;
+use App\Models\User;
 use Carbon\Carbon;
 use DateTime;
 use DatePeriod;
@@ -47,6 +49,25 @@ class IngredientController extends Controller
                     ->get();
 
         return $saved;
+    }
+
+    public function checkExpired(int $ing_ID, int $id)
+    {   
+        $saved = IngredientController::show($id);     
+        $check = Expired::where('ingredient_id', '=', $ing_ID)-> exists();
+
+        if(!$check){
+            $success = Expired::create([
+                'ingredient_id' => $ing_ID,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ])->save();
+
+            User::where('id', $id)->increment('wasted', 1);
+            
+            return $success;
+        }
+        
     }
 
     public function delete(int $id)

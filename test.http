@@ -61,3 +61,8 @@ Content-Type: application/json
     "ingredient_name": "Test2",
     "expiry_date": "2021-12-22 16:14:58"
 }
+
+###
+POST http://127.0.0.1:8000/api/check_expired/1/1 HTTP/1.1
+Accept: application/json
+Content-Type: application/json

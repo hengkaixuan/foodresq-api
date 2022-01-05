@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Models\ConsumedIngredient;
+use App\Models\User;
+
 use Carbon\Carbon;
 use DateTime;
 use DatePeriod;
@@ -21,8 +23,8 @@ class ConsumedIngController extends Controller
     public function create(Request $request)
     {
         //get user
-        //$user = auth()->user();
-
+        $user = auth()->user();
+        
         $validatedData = $request->validate([
             'ingredient_name' => 'required|string|max:255',
             'expiry_date' => 'required',
@@ -34,7 +36,12 @@ class ConsumedIngController extends Controller
             'expiry_date' => $validatedData['expiry_date'],
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
+            
         ])->save();
+
+        if($success){
+            User::where('id', $request->user_id)->increment('saved', 1);
+        }
 
         return $success;
     }
