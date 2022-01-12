@@ -24,17 +24,25 @@ Route::post('/login', [AuthController::class, 'login']);
 //Recipe
 Route::post('/create_recipe', [RecipesController::class, 'create']);
 Route::get('/get_recipe', [RecipesController::class, 'index']);
+
 //ingredient
 Route::post('/save_ingredient', [IngredientController::class, 'create']);
 Route::get('/ingredient', [IngredientController::class, 'index']);
-//user id
-Route::get('/ingredient/{id}', [IngredientController::class, 'show']);
-//ingredient id
-Route::delete('/ingredientDelete/{id}', [IngredientController::class, 'delete']);
-//consumed ingredient
-Route::post('/consumed_ingredient', [ConsumedIngController::class, 'create']);
 
 Route::group(['middleware' => ['auth:sanctum']], function(){
+    //auth
+    Route::post('/me', [AuthController::class, 'me']);
+
+    //ingredient
+    Route::post('/save_ingredient', [IngredientController::class, 'create']);
+    //user id
+    Route::get('/ingredient/{id}', [IngredientController::class, 'show']);
+    //ingredient id
+    Route::delete('/ingredientDelete/{id}', [IngredientController::class, 'delete']);
+    //consumed ingredient
+    Route::post('/consumed_ingredient', [ConsumedIngController::class, 'create']);
+
+    //logout
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 

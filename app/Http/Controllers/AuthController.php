@@ -14,24 +14,28 @@ class AuthController extends Controller
         $fields = $request->validate([
             'name' => 'required|string',
             'email' => 'required|string|unique:users,email',
-            'password' => 'required|string|confirmed',
+            'password' => 'required|string|min:8',
         ]);
 
-        $user = User::create([
+        $newUser = User::create([
             'name' => $fields['name'],
             'email' => $fields['email'],
             'password' => bcrypt($fields['password'])
         ]);
 
+        $user =  User::withSelectUser()
+            ->where('users.id', $newUser->id)
+            ->firstOrFail();
+
         $token = $user->createToken('auth_token')->plainTextToken;
 
-        $response = [
-            'user' => $user,
-            'token' => $token
-        ];
+        $user->accessToken = $token;
+        $user->tokenType = 'Bearer';
+        $user->isLogin = true;
 
-        return response($response, 200);
+        return $user;
     }
+
 
     public function login(Request $request){
         $fields = $request->validate([
@@ -39,7 +43,7 @@ class AuthController extends Controller
             'password' => 'required|string'
         ]);
 
-        $user = User::where('email', $fields['email'])->first();
+        $user = User::where('email', '=', $fields['email'])->firstOrFail();
         
         if(!$user || !Hash::check($fields['password'],$user->password)){
             return response([
@@ -47,14 +51,43 @@ class AuthController extends Controller
             ], 401);
         }
 
+        // $token = $user->createToken('auth_token')->plainTextToken;
+
+        // $response = [
+        //     'user' => $user,
+        //     'token' => $token
+        // ];
+
+        // $user = auth()->user();
+        // $user = User::withSelectUser()
+        //     ->where($request['login'])
+        //     ->firstOrFail();
+
+
         $token = $user->createToken('auth_token')->plainTextToken;
 
-        $response = [
-            'user' => $user,
-            'token' => $token
-        ];
+        $user->accessToken = $token;
+        $user->tokenType = 'Bearer';
+        $user->isLogin = true;
 
-        return response($response, 200);
+        return $user;
+    }
+
+    public function me(Request $request)
+    {
+
+        $user_id = $request->user()->id;
+        $user = auth()->user();
+        $user = User::withSelectUser()->withExtraUserAttributes($user->id)
+            ->where('users.id', $user_id)
+            ->firstOrFail();
+
+        // $user->accessToken = request()->user()->currentAccessToken()->token;
+        // $user->tokenType = 'Bearer';
+
+        $user->isLogin = true;
+
+        return $user;
     }
 
     public function logout(Request $request){
