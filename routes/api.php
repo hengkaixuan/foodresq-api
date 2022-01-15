@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\RecipesController;
 use App\Http\Controllers\IngredientController;
 use App\Http\Controllers\ConsumedIngController;
 use Illuminate\Http\Request;
@@ -19,6 +20,13 @@ use Illuminate\Support\Facades\Route;
 //Public Routes
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+
+//Recipe
+Route::post('/create_recipe', [RecipesController::class, 'create']);
+Route::get('/get_recipe', [RecipesController::class, 'index']);
+
+//ingredient
+Route::post('/save_ingredient', [IngredientController::class, 'create']);
 Route::get('/ingredient', [IngredientController::class, 'index']);
 
 

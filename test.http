@@ -3,8 +3,8 @@ Accept: application/json
 Content-Type: application/json
 
 {
-    "name": "test100",
-    "email":"test100@test.com",
+    "username": "test1",
+    "email":"test1@test.com",
     "password": "12345678"
 }
 
@@ -21,6 +21,7 @@ Content-Type: application/json
 
 {
     "email": "test@g.com",
+    "login": "admin@test.com",
     "password": "12345678"
 }
 

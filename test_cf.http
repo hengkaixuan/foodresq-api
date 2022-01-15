@@ -1,0 +1,20 @@
+### Create Recipe
+POST http://localhost/api/create_recipe HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+{
+    "recipe_name": "Pineapple Tarts",
+    "recipe_image": "https://s3.ap-southeast-1.amazonaws.com/foodresq.recipes/FP-Pineapple-Tart-Cookies.jpeg",
+    "recipe_level": "Intermediate",
+    "recipe_ingredients": "flour, corn starch, salt, icing sugar, unsalted butter, egg yolks, condensed milk, pineapple jam, sugar",
+    "recipe_instructions": "If you are using canned pineapple slices, drain the pineapple slices and then squeeze the extra water/juice with your hands. Blend the canned pineapples until they are mushy, about 10 seconds. If you use fresh pineapples, remove the skin, cut into pieces and blend for 10 seconds.",
+    "recipe_source": "https://rasamalaysia.com/recipe-pineapple-tarts/",
+    "recipe_video": "https://youtu.be/wuOIKfABhYE"
+
+}
+
+### Get Recipe
+GET http://localhost/api/get_recipe HTTP/1.1
+Accept: application/json
+Content-Type: application/json
