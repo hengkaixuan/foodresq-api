@@ -3,10 +3,16 @@ Accept: application/json
 Content-Type: application/json
 
 {
-    "name": "test1",
-    "email":"test1@test.com",
+    "name": "test100",
+    "email":"test100@test.com",
     "password": "12345678"
 }
+
+###
+POST http://127.0.0.1:8000/api/me HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer 26|q5mOkfacHWXS3I3ufpSUomvLpVqZcmlDOQzJtyId
 
 ###
 POST http://127.0.0.1:8000/api/login HTTP/1.1
@@ -14,15 +20,21 @@ Accept: application/json
 Content-Type: application/json
 
 {
-    "email": "test1@test.com",
+    "email": "test@g.com",
     "password": "12345678"
 }
+
+###
+POST http://127.0.0.1:8000/api/me HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer 31|0CWvkhVJw7dyZh3zk2zxp1Fo9CpWnTGP4K4tGThG
 
 ###
 POST http://127.0.0.1:8000/api/logout HTTP/1.1
 Accept: application/json
 Content-Type: application/json
-Authorization: Bearer 32|lZ98VWXYdYJmTelzImz1mKVjQBDPLHzjyDQf391p
+Authorization: Bearer 5|0ewSDSB1vTeR2z6kD3zwKZZbnsVVl90OuE6mqdMY
 
 
 ###
@@ -66,3 +78,11 @@ Content-Type: application/json
 POST http://127.0.0.1:8000/api/check_expired/1/1 HTTP/1.1
 Accept: application/json
 Content-Type: application/json
+
+###
+GET  http://127.0.0.1:8000/api/food_saved/2 HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer 16|fy7ey1Q46FLl1z1U91nglU8CkAic04HGeIyZL815
+
+

@@ -16,8 +16,6 @@ class CreateExpiredTable extends Migration
         Schema::create('expired', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('ingredient_id');
-            //$table->foreign('user_id')->references('id')->on('users'); 
-            $table->foreign('ingredient_id')->references('id')->on('saved_ingredients'); 
             $table->timestamps();
         });
     }

@@ -43,7 +43,7 @@ class AuthController extends Controller
             'password' => 'required|string'
         ]);
 
-        $user = User::where('email', $fields['email'])->first();
+        $user = User::where('email', '=', $fields['email'])->firstOrFail();
         
         if(!$user || !Hash::check($fields['password'],$user->password)){
             return response([
@@ -58,10 +58,10 @@ class AuthController extends Controller
         //     'token' => $token
         // ];
 
-        $user = auth()->user();
-        $user = User::withSelectUser()
-            ->where($request['login'])
-            ->firstOrFail();
+        // $user = auth()->user();
+        // $user = User::withSelectUser()
+        //     ->where($request['login'])
+        //     ->firstOrFail();
 
 
         $token = $user->createToken('auth_token')->plainTextToken;
@@ -73,11 +73,41 @@ class AuthController extends Controller
         return $user;
     }
 
+    public function me(Request $request)
+    {
+
+        $user_id = $request->user()->id;
+        $user = auth()->user();
+        $user = User::withSelectUser()
+            ->where('users.id', $user_id)
+            ->firstOrFail();
+
+        // $user->accessToken = request()->user()->currentAccessToken()->token;
+        // $user->tokenType = 'Bearer';
+
+        $user->isLogin = true;
+
+        return $user;
+    }
+
     public function logout(Request $request){
         auth()->user()->tokens()->delete();
 
         return [
             'message' => 'Logged Out'
         ];
+    }
+
+    public function getSaved(Request $request){
+        $user_id = $request->user()->id;
+        $user = auth()->user();
+        return $user->where('id', '=', $request->user()->id)
+        ->firstOrFail();;
+    }
+
+    public function getWasted(Request $request){
+        $user_id = $request->user()->id;
+        $user = auth()->user();
+        return $user->wasted;
     }
 }
