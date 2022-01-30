@@ -1,4 +1,4 @@
-POST http://127.0.0.1:8000/api/register HTTP/1.1
+POST http://localhost/api/register HTTP/1.1
 Accept: application/json
 Content-Type: application/json
 
@@ -9,37 +9,64 @@ Content-Type: application/json
 }
 
 ###
-POST http://127.0.0.1:8000/api/me HTTP/1.1
+POST http://localhost/api/me HTTP/1.1
 Accept: application/json
 Content-Type: application/json
 Authorization: Bearer 26|q5mOkfacHWXS3I3ufpSUomvLpVqZcmlDOQzJtyId
 
 ###
-POST http://127.0.0.1:8000/api/login HTTP/1.1
+POST http://localhost/api/login HTTP/1.1
 Accept: application/json
 Content-Type: application/json
 
 {
-    "email": "test@g.com",
-    "login": "admin@test.com",
+    "email": "cftan925@gmail.com",
+    "login": "cftan925@gmail.com",
     "password": "12345678"
 }
 
 ###
-POST http://127.0.0.1:8000/api/me HTTP/1.1
+POST http://localhost/api/me HTTP/1.1
 Accept: application/json
 Content-Type: application/json
 Authorization: Bearer 31|0CWvkhVJw7dyZh3zk2zxp1Fo9CpWnTGP4K4tGThG
 
 ###
-POST http://127.0.0.1:8000/api/logout HTTP/1.1
+POST http://localhost/api/logout HTTP/1.1
 Accept: application/json
 Content-Type: application/json
 Authorization: Bearer 5|0ewSDSB1vTeR2z6kD3zwKZZbnsVVl90OuE6mqdMY
 
 
 ###
-POST http://127.0.0.1:8000/api/save_ingredient HTTP/1.1
+POST http://localhost/api/save_ingredient HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer 2|fl7jRsu24EOb8WaBiLmefWvGKhJawWL9eyWtUFc2
+
+{
+    "user_id": 1,
+    "ingredient_name": "chicken floss",
+    "expiry_date": "2021-12-22 16:14:58"
+}
+
+###
+GET  http://localhost/api/ingredient HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+###
+GET  http://localhost/api/ingredient/1 HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+###
+DELETE  http://localhost/api/ingredientDelete/5 HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+###
+POST http://localhost/api/consumed_ingredient HTTP/1.1
 Accept: application/json
 Content-Type: application/json
 
@@ -50,38 +77,12 @@ Content-Type: application/json
 }
 
 ###
-GET  http://127.0.0.1:8000/api/ingredient HTTP/1.1
+POST http://localhost/api/check_expired/1/1 HTTP/1.1
 Accept: application/json
 Content-Type: application/json
 
 ###
-GET  http://127.0.0.1:8000/api/ingredient/1 HTTP/1.1
-Accept: application/json
-Content-Type: application/json
-
-###
-DELETE  http://127.0.0.1:8000/api/ingredientDelete/5 HTTP/1.1
-Accept: application/json
-Content-Type: application/json
-
-###
-POST http://127.0.0.1:8000/api/consumed_ingredient HTTP/1.1
-Accept: application/json
-Content-Type: application/json
-
-{
-    "user_id": 1,
-    "ingredient_name": "Test2",
-    "expiry_date": "2021-12-22 16:14:58"
-}
-
-###
-POST http://127.0.0.1:8000/api/check_expired/1/1 HTTP/1.1
-Accept: application/json
-Content-Type: application/json
-
-###
-GET  http://127.0.0.1:8000/api/food_saved/2 HTTP/1.1
+GET  http://localhost/api/food_saved/2 HTTP/1.1
 Accept: application/json
 Content-Type: application/json
 Authorization: Bearer 16|fy7ey1Q46FLl1z1U91nglU8CkAic04HGeIyZL815
